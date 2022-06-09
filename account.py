@@ -1,16 +1,33 @@
 class Account:
-    def __init__(self,account_name, account_number,balance,account_type):
+    def __init__(self,account_name, account_number):
+        self.balance=0
         self.account_name=account_name
         self.account_number=account_number
-        self.balance=balance
-        self.account_type=account_type
+        self.deposits=[]
+        self.withdrawals=[]
+
         
-    def deposit(self,deposit):
-        self.deposit=deposit
-        self.balance += self.deposit
-        return f"Your balance is {self.balance}"
+    def deposit(self,amount):
+        if amount <=0:
+            return f"Deposit amount should be more than zero"
+        else:
+            self.balance += amount
+            self.deposits.append(amount)
+            return f"You deposited {amount}.Your new balance is {self.balance}"
+             
     
-    def withdraw(self, withdraw):
-        self.withdraw=withdraw
-        self.balance-=self.withdraw
-        return f"Your balane is {self.balance}"
+    def withdraw(self, amount):
+        if amount>self.balance:
+            return f"Your balance is {self.balance}, you cannot withdraw the {amount}"
+        elif amount<=0:
+            return f"Amount must be greater than zero"
+        else:    
+            self.balance-=amount
+            self.withdrawals.append(amount)
+            return f"You withdrew {amount}.Your new balane is {self.balance}"
+        
+    def deposits_statement(self):
+        print(*self.deposits, sep="\n")
+        
+    def withdrawals_statement(self):
+        print(*self.withdrawals, sep="\n")    
