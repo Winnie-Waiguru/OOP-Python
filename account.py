@@ -17,17 +17,27 @@ class Account:
              
     
     def withdraw(self, amount):
-        if amount>self.balance:
+        transaction=100
+        if (amount+transaction)>self.balance:
             return f"Your balance is {self.balance}, you cannot withdraw the {amount}"
-        elif amount<=0:
+        elif (amount+transaction)<=0:
             return f"Amount must be greater than zero"
         else:    
-            self.balance-=amount
+            self.balance-=(amount +transaction)
             self.withdrawals.append(amount)
-            return f"You withdrew {amount}.Your new balane is {self.balance}"
+            return f"You withdrew {amount} and the transaction cost was {transaction}.Your new balane is {self.balance}"
         
     def deposits_statement(self):
-        print(*self.deposits, sep="\n")
+        for depo in self.deposits:
+            print(depo)
         
     def withdrawals_statement(self):
-        print(*self.withdrawals, sep="\n")    
+        for withdraws in self.withdrawals:
+            print(withdraws) 
+            
+    def current_balance(self):
+        balance=self.balance
+        print("Your current balance is {balance}")        
+           
+         
+               
